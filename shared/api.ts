@@ -20,6 +20,7 @@ export interface AnalyzeResponse {
   universe: string[];
   vectors: { candidate: number[]; required: number[] };
   recommendations: { title: string; url: string; provider: string; type: "course"|"project"|"certification" }[];
+  semanticScore?: number; // Optional cosine similarity using embeddings when OPENAI_API_KEY is set
 }
 
 export interface ReportsListResponse {
