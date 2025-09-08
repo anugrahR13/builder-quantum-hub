@@ -49,6 +49,20 @@ export const analyzeHandler: RequestHandler = async (req, res) => {
 
     const recommendations = recommendResources(missingSkills);
 
+    // Optional: semantic similarity using OpenAI embeddings if key exists
+    let semanticScore: number | undefined = undefined;
+    try {
+      if (process.env.OPENAI_API_KEY && resumeText && parsed.data.jobDescription) {
+        const [ea, eb] = await Promise.all([
+          embedText(resumeText, process.env.OPENAI_API_KEY),
+          embedText(parsed.data.jobDescription, process.env.OPENAI_API_KEY),
+        ]);
+        semanticScore = cosine(ea, eb);
+      }
+    } catch (e) {
+      // ignore errors from external service
+    }
+
     // Persist summary (best-effort)
     try {
       await saveAnalysis({
@@ -73,12 +87,30 @@ export const analyzeHandler: RequestHandler = async (req, res) => {
       universe,
       vectors: { candidate: candVec, required: reqVec },
       recommendations,
+      semanticScore,
     });
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: "Failed to analyze." });
   }
 };
+
+async function embedText(text: string, key: string): Promise<number[]> {
+  const res = await fetch("https://api.openai.com/v1/embeddings", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${key}`,
+    },
+    body: JSON.stringify({
+      model: "text-embedding-3-small",
+      input: text.slice(0, 8000),
+    }),
+  });
+  if (!res.ok) throw new Error("Embedding failed");
+  const json: any = await res.json();
+  return json.data?.[0]?.embedding || [];
+}
 
 function parseArray(v: any): string[] {
   if (!v) return [];
