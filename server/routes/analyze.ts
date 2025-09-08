@@ -5,6 +5,7 @@ import { extractTextFromUpload } from "../utils/file";
 import { extractSkills, vectorize, cosine } from "../utils/nlp";
 import { SKILL_VOCABULARY, recommendResources } from "../utils/skills";
 import { saveAnalysis } from "../db";
+import { suggestJobs } from "../utils/jobs";
 
 export const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 10 * 1024 * 1024 } });
 
