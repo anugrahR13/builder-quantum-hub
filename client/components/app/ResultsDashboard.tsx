@@ -45,6 +45,9 @@ export function ResultsDashboard({ data }: { data: AnalyzeResponse }) {
         <h3 className="font-semibold mb-2">Job Fit Score</h3>
         <p className="text-5xl font-extrabold tracking-tight bg-gradient-to-r from-[hsl(var(--brand-from))] via-[hsl(var(--brand-via))] to-[hsl(var(--brand-to))] bg-clip-text text-transparent">{data.fitScore}%</p>
         <p className="text-sm text-muted-foreground mt-2">Cosine similarity between your skills and job requirements.</p>
+        {typeof data.semanticScore === "number" && (
+          <p className="text-xs mt-1">Semantic Similarity: <span className="font-medium">{Math.round(data.semanticScore * 100)}%</span></p>
+        )}
         <div className="mt-4">
           <div className="h-40">
             <ResponsiveContainer width="100%" height="100%">
