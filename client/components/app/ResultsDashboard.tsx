@@ -60,6 +60,31 @@ export function ResultsDashboard({ data }: { data: AnalyzeResponse }) {
         </div>
       </Card>
 
+      <Card className="p-6 lg:col-span-3 glow-card">
+        <h3 className="font-semibold mb-2">Suggested Roles for You</h3>
+        {(!data.suggestions || data.suggestions.length === 0) ? (
+          <p className="text-sm text-muted-foreground">No suggestions yet.</p>
+        ) : (
+          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {data.suggestions.map((s) => (
+              <li key={s.title} className="rounded-md border p-3 bg-card">
+                <div className="flex items-center justify-between">
+                  <p className="font-medium">{s.title}</p>
+                  <span className="text-sm font-semibold">{s.score}%</span>
+                </div>
+                <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{s.description}</p>
+                <div className="mt-2 h-1.5 rounded bg-muted overflow-hidden">
+                  <div className="h-full bg-gradient-to-r from-[hsl(var(--brand-from))] via-[hsl(var(--brand-via))] to-[hsl(var(--brand-to))] animated-gradient" style={{ width: `${s.score}%` }} />
+                </div>
+                {s.missing.length > 0 && (
+                  <p className="text-xs mt-2"><span className="text-muted-foreground">Build:</span> {s.missing.slice(0,3).join(", ")}</p>
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
+      </Card>
+
       <Card className="p-6 lg:col-span-3">
         <h3 className="font-semibold mb-2">Missing Skills</h3>
         {data.missingSkills.length === 0 ? (
