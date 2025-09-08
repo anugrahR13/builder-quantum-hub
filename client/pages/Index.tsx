@@ -30,7 +30,7 @@ export default function Index() {
                 </div>
               </div>
               <div className="mt-4 h-2 rounded bg-muted overflow-hidden">
-                <div className="h-full bg-primary" style={{ width: "86%" }} />
+                <div className="h-full bg-gradient-to-r from-[hsl(var(--brand-from))] via-[hsl(var(--brand-via))] to-[hsl(var(--brand-to))] animated-gradient" style={{ width: "86%" }} />
               </div>
             </div>
           </div>
