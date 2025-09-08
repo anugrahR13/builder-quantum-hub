@@ -42,46 +42,50 @@ export default function UploadForm() {
 
   return (
     <div className="grid gap-8 lg:grid-cols-2">
-      <section className="rounded-lg border p-6 bg-card">
-        <h3 className="font-semibold mb-1">1. Upload Resume or Paste Text</h3>
-        <p className="text-sm text-muted-foreground mb-4">PDF or DOCX supported. Manual entry works too.</p>
-        <div className="grid gap-4">
-          <div>
-            <Label htmlFor="resume">Resume file</Label>
-            <Input id="resume" type="file" accept=".pdf,.docx,.txt" onChange={(e) => setResumeFile(e.target.files?.[0] || null)} />
+      <div className="rounded-xl p-[1px] bg-gradient-to-r from-[hsl(var(--brand-from))] via-[hsl(var(--brand-via))] to-[hsl(var(--brand-to))]">
+        <section className="rounded-xl p-6 bg-card">
+          <h3 className="font-semibold mb-1">1. Upload Resume or Paste Text</h3>
+          <p className="text-sm text-muted-foreground mb-4">PDF or DOCX supported. Manual entry works too.</p>
+          <div className="grid gap-4">
+            <div>
+              <Label htmlFor="resume">Resume file</Label>
+              <Input id="resume" type="file" accept=".pdf,.docx,.txt" onChange={(e) => setResumeFile(e.target.files?.[0] || null)} />
+            </div>
+            <div>
+              <Label htmlFor="resumeText">Or paste resume text</Label>
+              <Textarea id="resumeText" rows={6} value={resumeText} onChange={(e) => setResumeText(e.target.value)} placeholder="Paste your resume content here" />
+            </div>
+            <div>
+              <Label>Manual skills</Label>
+              <SkillTagInput value={skills} onChange={setSkills} placeholder="e.g. python, pandas, docker" />
+            </div>
           </div>
-          <div>
-            <Label htmlFor="resumeText">Or paste resume text</Label>
-            <Textarea id="resumeText" rows={6} value={resumeText} onChange={(e) => setResumeText(e.target.value)} placeholder="Paste your resume content here" />
-          </div>
-          <div>
-            <Label>Manual skills</Label>
-            <SkillTagInput value={skills} onChange={setSkills} placeholder="e.g. python, pandas, docker" />
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
-      <section className="rounded-lg border p-6 bg-card">
-        <h3 className="font-semibold mb-1">2. Paste Job Description</h3>
-        <p className="text-sm text-muted-foreground mb-4">We'll parse required skills and compute a Job Fit Score.</p>
-        <div className="grid gap-4">
-          <div>
-            <Label htmlFor="jobTitle">Job title</Label>
-            <Input id="jobTitle" value={jobTitle} onChange={(e) => setJobTitle(e.target.value)} placeholder="e.g. Data Scientist" />
+      <div className="rounded-xl p-[1px] bg-gradient-to-r from-[hsl(var(--brand-from))] via-[hsl(var(--brand-via))] to-[hsl(var(--brand-to))]">
+        <section className="rounded-xl p-6 bg-card">
+          <h3 className="font-semibold mb-1">2. Paste Job Description</h3>
+          <p className="text-sm text-muted-foreground mb-4">We'll parse required skills and compute a Job Fit Score.</p>
+          <div className="grid gap-4">
+            <div>
+              <Label htmlFor="jobTitle">Job title</Label>
+              <Input id="jobTitle" value={jobTitle} onChange={(e) => setJobTitle(e.target.value)} placeholder="e.g. Data Scientist" />
+            </div>
+            <div>
+              <Label htmlFor="jd">Job description</Label>
+              <Textarea id="jd" rows={10} value={jobDescription} onChange={(e) => setJobDescription(e.target.value)} placeholder="Paste job description here" />
+            </div>
+            <div className="flex items-center justify-end gap-2">
+              <Button variant="secondary" onClick={() => { setResumeFile(null); setResumeText(""); setSkills([]); setJobDescription(""); setJobTitle(""); setResult(null); }}>Reset</Button>
+              <Button onClick={onSubmit} disabled={loading || (!resumeFile && !resumeText && skills.length === 0) || jobDescription.trim().length < 10}>
+                {loading ? "Analyzing..." : "Analyze"}
+              </Button>
+            </div>
+            {error && <p className="text-sm text-destructive">{error}</p>}
           </div>
-          <div>
-            <Label htmlFor="jd">Job description</Label>
-            <Textarea id="jd" rows={10} value={jobDescription} onChange={(e) => setJobDescription(e.target.value)} placeholder="Paste job description here" />
-          </div>
-          <div className="flex items-center justify-end gap-2">
-            <Button variant="secondary" onClick={() => { setResumeFile(null); setResumeText(""); setSkills([]); setJobDescription(""); setJobTitle(""); setResult(null); }}>Reset</Button>
-            <Button onClick={onSubmit} disabled={loading || (!resumeFile && !resumeText && skills.length === 0) || jobDescription.trim().length < 10}>
-              {loading ? "Analyzing..." : "Analyze"}
-            </Button>
-          </div>
-          {error && <p className="text-sm text-destructive">{error}</p>}
-        </div>
-      </section>
+        </section>
+      </div>
 
       {result && (
         <section className="lg:col-span-2">
