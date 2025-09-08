@@ -1,62 +1,45 @@
-import { DemoResponse } from "@shared/api";
-import { useEffect, useState } from "react";
+import UploadForm from "@/components/app/UploadForm";
 
 export default function Index() {
-  const [exampleFromServer, setExampleFromServer] = useState("");
-  // Fetch users on component mount
-  useEffect(() => {
-    fetchDemo();
-  }, []);
-
-  // Example of how to fetch data from the server (if needed)
-  const fetchDemo = async () => {
-    try {
-      const response = await fetch("/api/demo");
-      const data = (await response.json()) as DemoResponse;
-      setExampleFromServer(data.message);
-    } catch (error) {
-      console.error("Error fetching hello:", error);
-    }
-  };
-
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">
-      <div className="text-center">
-        {/* TODO: FUSION_GENERATION_APP_PLACEHOLDER replace everything here with the actual app! */}
-        <h1 className="text-2xl font-semibold text-slate-800 flex items-center justify-center gap-3">
-          <svg
-            className="animate-spin h-8 w-8 text-slate-400"
-            viewBox="0 0 50 50"
-          >
-            <circle
-              className="opacity-30"
-              cx="25"
-              cy="25"
-              r="20"
-              stroke="currentColor"
-              strokeWidth="5"
-              fill="none"
-            />
-            <circle
-              className="text-slate-600"
-              cx="25"
-              cy="25"
-              r="20"
-              stroke="currentColor"
-              strokeWidth="5"
-              fill="none"
-              strokeDasharray="100"
-              strokeDashoffset="75"
-            />
-          </svg>
-          Generating your app...
-        </h1>
-        <p className="mt-4 text-slate-600 max-w-md">
-          Watch the chat on the left for updates that might need your attention
-          to finish generating
-        </p>
-        <p className="mt-4 hidden max-w-md">{exampleFromServer}</p>
-      </div>
+    <div>
+      <section className="container py-16" id="get-started">
+        <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+          <div>
+            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight">
+              Career Path & Skill Gap Analyzer
+            </h1>
+            <p className="mt-4 text-muted-foreground text-lg">
+              Upload your resume, paste a job description, and get an AI-powered Skill Gap Report, personalized learning path, and Job Fit Score.
+            </p>
+            <ul className="mt-6 grid gap-3">
+              <li className="flex items-start gap-3"><span className="h-6 w-6 rounded-full bg-primary text-primary-foreground grid place-items-center text-xs font-bold">1</span><span>Parse resume and job description (PDF/DOCX supported)</span></li>
+              <li className="flex items-start gap-3"><span className="h-6 w-6 rounded-full bg-primary text-primary-foreground grid place-items-center text-xs font-bold">2</span><span>Semantic matching with cosine similarity</span></li>
+              <li className="flex items-start gap-3"><span className="h-6 w-6 rounded-full bg-primary text-primary-foreground grid place-items-center text-xs font-bold">3</span><span>Visual dashboard + recommended courses/projects</span></li>
+            </ul>
+          </div>
+          <div className="relative">
+            <div className="absolute -inset-4 bg-gradient-to-tr from-primary/20 to-blue-500/20 blur-2xl rounded-3xl" />
+            <div className="relative rounded-2xl border bg-card p-6 shadow-lg">
+              <p className="text-sm text-muted-foreground">Example output</p>
+              <div className="mt-2 flex items-end justify-between">
+                <p className="text-5xl font-extrabold">86%</p>
+                <div className="text-right">
+                  <p className="text-xs text-muted-foreground">Missing</p>
+                  <p className="font-medium">Docker, TensorFlow</p>
+                </div>
+              </div>
+              <div className="mt-4 h-2 rounded bg-muted overflow-hidden">
+                <div className="h-full bg-primary" style={{ width: "86%" }} />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="container py-12">
+        <UploadForm />
+      </section>
     </div>
   );
 }
