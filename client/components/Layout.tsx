@@ -5,17 +5,17 @@ import { Button } from "@/components/ui/button";
 export default function Layout() {
   const { pathname } = useLocation();
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-[hsl(var(--background))] to-[hsl(var(--muted))]">
-      <header className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-background/70 border-b">
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-[hsl(var(--secondary))] via-[hsl(var(--background))] to-[hsl(var(--muted))]">
+      <header className="sticky top-0 z-40 border-b bg-gradient-to-r from-[hsl(var(--brand-from))]/10 via-transparent to-[hsl(var(--brand-to))]/10 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="container flex h-16 items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
-            <div className="h-8 w-8 rounded-lg bg-gradient-to-tr from-primary to-blue-500" />
+            <div className="h-8 w-8 rounded-lg bg-gradient-to-tr from-[hsl(var(--brand-from))] via-[hsl(var(--brand-via))] to-[hsl(var(--brand-to))]" />
             <span className="font-extrabold tracking-tight text-lg">Career Path & Skill Gap Analyzer</span>
           </Link>
           <nav className="flex items-center gap-2">
             <NavLink to="/" active={pathname === "/"}>Home</NavLink>
             <NavLink to="/reports" active={pathname.startsWith("/reports")}>Reports</NavLink>
-            <Button asChild size="sm" className="ml-2">
+            <Button asChild size="sm" className="ml-2 bg-gradient-to-r from-[hsl(var(--brand-from))] via-[hsl(var(--brand-via))] to-[hsl(var(--brand-to))] text-primary-foreground">
               <a href="#get-started">Get Started</a>
             </Button>
           </nav>

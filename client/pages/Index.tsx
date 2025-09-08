@@ -19,7 +19,7 @@ export default function Index() {
             </ul>
           </div>
           <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-tr from-primary/20 to-blue-500/20 blur-2xl rounded-3xl" />
+            <div className="absolute -inset-4 bg-gradient-to-tr from-[hsl(var(--brand-from))]/25 via-[hsl(var(--brand-via))]/20 to-[hsl(var(--brand-to))]/25 blur-2xl rounded-3xl" />
             <div className="relative rounded-2xl border bg-card p-6 shadow-lg">
               <p className="text-sm text-muted-foreground">Example output</p>
               <div className="mt-2 flex items-end justify-between">
