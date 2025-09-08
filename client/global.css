@@ -110,4 +110,19 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  .animated-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
+  }
+
+  .glow-card {
+    box-shadow: 0 10px 30px hsl(var(--brand-from) / 0.15), 0 6px 16px hsl(var(--brand-to) / 0.12);
+  }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
