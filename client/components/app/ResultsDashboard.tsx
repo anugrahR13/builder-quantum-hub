@@ -41,9 +41,9 @@ export function ResultsDashboard({ data }: { data: AnalyzeResponse }) {
         </div>
       </Card>
 
-      <Card className="p-6">
+      <Card className="p-6 glow-card">
         <h3 className="font-semibold mb-2">Job Fit Score</h3>
-        <p className="text-5xl font-extrabold tracking-tight">{data.fitScore}%</p>
+        <p className="text-5xl font-extrabold tracking-tight bg-gradient-to-r from-[hsl(var(--brand-from))] via-[hsl(var(--brand-via))] to-[hsl(var(--brand-to))] bg-clip-text text-transparent">{data.fitScore}%</p>
         <p className="text-sm text-muted-foreground mt-2">Cosine similarity between your skills and job requirements.</p>
         <div className="mt-4">
           <div className="h-40">
@@ -52,8 +52,8 @@ export function ResultsDashboard({ data }: { data: AnalyzeResponse }) {
                 <PolarGrid />
                 <PolarAngleAxis dataKey="subject" tick={false} />
                 <PolarRadiusAxis domain={[0, 1]} tick={false} />
-                <Radar name="Required" dataKey="A" stroke="hsl(var(--destructive))" fill="hsl(var(--destructive))" fillOpacity={0.2} />
-                <Radar name="You" dataKey="B" stroke="hsl(var(--primary))" fill="hsl(var(--primary))" fillOpacity={0.3} />
+                <Radar name="Required" dataKey="A" stroke="hsl(var(--destructive))" fill="hsl(var(--destructive))" fillOpacity={0.15} />
+                <Radar name="You" dataKey="B" stroke="hsl(var(--brand-to))" fill="hsl(var(--brand-from))" fillOpacity={0.25} />
               </RadarChart>
             </ResponsiveContainer>
           </div>
