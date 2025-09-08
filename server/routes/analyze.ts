@@ -50,6 +50,8 @@ export const analyzeHandler: RequestHandler = async (req, res) => {
 
     const recommendations = recommendResources(missingSkills);
 
+    const suggestions = suggestJobs(candidateSkills, parsed.data.jobTitle || inferJobTitle(parsed.data.jobDescription));
+
     // Optional: semantic similarity using OpenAI embeddings if key exists
     let semanticScore: number | undefined = undefined;
     try {
