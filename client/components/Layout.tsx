@@ -6,7 +6,7 @@ export default function Layout() {
   const { pathname } = useLocation();
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-[hsl(var(--secondary))] via-[hsl(var(--background))] to-[hsl(var(--muted))]">
-      <header className="sticky top-0 z-40 border-b bg-gradient-to-r from-[hsl(var(--brand-from))]/10 via-transparent to-[hsl(var(--brand-to))]/10 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <header className="sticky top-0 z-40 border-b bg-gradient-to-r from-[hsl(var(--brand-from))]/10 via-transparent to-[hsl(var(--brand-to))]/10 backdrop-blur supports-[backdrop-filter]:bg-background/60 animated-gradient">
         <div className="container flex h-16 items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
             <div className="h-8 w-8 rounded-lg bg-gradient-to-tr from-[hsl(var(--brand-from))] via-[hsl(var(--brand-via))] to-[hsl(var(--brand-to))]" />
@@ -15,7 +15,7 @@ export default function Layout() {
           <nav className="flex items-center gap-2">
             <NavLink to="/" active={pathname === "/"}>Home</NavLink>
             <NavLink to="/reports" active={pathname.startsWith("/reports")}>Reports</NavLink>
-            <Button asChild size="sm" className="ml-2 bg-gradient-to-r from-[hsl(var(--brand-from))] via-[hsl(var(--brand-via))] to-[hsl(var(--brand-to))] text-primary-foreground">
+            <Button asChild size="sm" className="ml-2 bg-gradient-to-r from-[hsl(var(--brand-from))] via-[hsl(var(--brand-via))] to-[hsl(var(--brand-to))] text-primary-foreground animated-gradient">
               <a href="#get-started">Get Started</a>
             </Button>
           </nav>
