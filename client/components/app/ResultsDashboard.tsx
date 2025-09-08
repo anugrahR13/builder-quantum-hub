@@ -33,9 +33,9 @@ export function ResultsDashboard({ data }: { data: AnalyzeResponse }) {
               </defs>
               <XAxis dataKey="skill" hide />
               <YAxis domain={[0, 1]} ticks={[0, 1]} />
-              <Tooltip cursor={{ fill: "hsl(var(--muted))" }} />
-              <Bar dataKey="required" fill="url(#gradReq)" name="Required" radius={4} />
-              <Bar dataKey="candidate" fill="url(#gradYou)" name="You" radius={4} />
+              <Tooltip cursor={{ fill: "hsl(var(--muted))" }} wrapperStyle={{ outline: "none" }} />
+              <Bar dataKey="required" fill="url(#gradReq)" name="Required" radius={6} isAnimationActive animationDuration={1200} animationBegin={100} />
+              <Bar dataKey="candidate" fill="url(#gradYou)" name="You" radius={6} isAnimationActive animationDuration={1400} animationBegin={150} />
             </BarChart>
           </ResponsiveContainer>
         </div>
