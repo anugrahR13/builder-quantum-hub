@@ -117,21 +117,31 @@
   }
 
   .glow-card {
-    box-shadow: 0 10px 30px hsl(var(--brand-from) / 0.15), 0 6px 16px hsl(var(--brand-to) / 0.12);
-    transition: transform .2s ease, box-shadow .2s ease;
+    box-shadow:
+      0 10px 30px hsl(var(--brand-from) / 0.15),
+      0 6px 16px hsl(var(--brand-to) / 0.12);
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
   }
   .glow-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 16px 40px hsl(var(--brand-from) / 0.22), 0 10px 24px hsl(var(--brand-to) / 0.18);
+    box-shadow:
+      0 16px 40px hsl(var(--brand-from) / 0.22),
+      0 10px 24px hsl(var(--brand-to) / 0.18);
   }
 
   .button-neon {
     position: relative;
-    transition: box-shadow .25s ease, transform .25s ease;
+    transition:
+      box-shadow 0.25s ease,
+      transform 0.25s ease;
   }
   .button-neon:hover {
     transform: translateY(-1px);
-    box-shadow: 0 0 18px hsl(var(--brand-from) / 0.5), 0 0 36px hsl(var(--brand-to) / 0.35);
+    box-shadow:
+      0 0 18px hsl(var(--brand-from) / 0.5),
+      0 0 36px hsl(var(--brand-to) / 0.35);
   }
   .button-neon::before {
     content: "";
@@ -139,18 +149,29 @@
     inset: -2px;
     z-index: -1;
     border-radius: inherit;
-    background: linear-gradient(90deg, hsl(var(--brand-from)), hsl(var(--brand-via)), hsl(var(--brand-to)));
+    background: linear-gradient(
+      90deg,
+      hsl(var(--brand-from)),
+      hsl(var(--brand-via)),
+      hsl(var(--brand-to))
+    );
     filter: blur(8px);
     opacity: 0;
-    transition: opacity .25s ease;
+    transition: opacity 0.25s ease;
   }
   .button-neon:hover::before {
-    opacity: .8;
+    opacity: 0.8;
   }
 }
 
 @keyframes gradient-shift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
