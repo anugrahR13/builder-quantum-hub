@@ -15,16 +15,27 @@ export function ResultsDashboard({ data }: { data: AnalyzeResponse }) {
 
   return (
     <div className="grid gap-6 lg:grid-cols-3" id="results">
-      <Card className="p-6 lg:col-span-2">
+      <Card className="p-6 lg:col-span-2 glow-card">
         <h3 className="font-semibold mb-4">Skill Coverage</h3>
         <div className="h-64">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={rows} margin={{ left: 16, right: 16 }}>
+              <defs>
+                <linearGradient id="gradReq" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stopColor="hsl(var(--destructive))"/>
+                  <stop offset="100%" stopColor="hsl(var(--accent))"/>
+                </linearGradient>
+                <linearGradient id="gradYou" x1="0" y1="0" x2="1" y2="0">
+                  <stop offset="0%" stopColor="hsl(var(--brand-from))"/>
+                  <stop offset="50%" stopColor="hsl(var(--brand-via))"/>
+                  <stop offset="100%" stopColor="hsl(var(--brand-to))"/>
+                </linearGradient>
+              </defs>
               <XAxis dataKey="skill" hide />
               <YAxis domain={[0, 1]} ticks={[0, 1]} />
               <Tooltip cursor={{ fill: "hsl(var(--muted))" }} />
-              <Bar dataKey="required" fill="hsl(var(--destructive))" name="Required" radius={4} />
-              <Bar dataKey="candidate" fill="hsl(var(--primary))" name="You" radius={4} />
+              <Bar dataKey="required" fill="url(#gradReq)" name="Required" radius={4} />
+              <Bar dataKey="candidate" fill="url(#gradYou)" name="You" radius={4} />
             </BarChart>
           </ResponsiveContainer>
         </div>
