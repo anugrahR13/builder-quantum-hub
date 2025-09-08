@@ -28,11 +28,11 @@ function expressPlugin(): Plugin {
   return {
     name: "express-plugin",
     apply: "serve", // Only apply during development (serve mode)
+    enforce: "pre", // mount before Vite's internal middlewares
     configureServer(server) {
       (async () => {
         const { createServer } = await import("./server");
         const app = createServer();
-        // Add Express app as middleware to Vite dev server
         server.middlewares.use(app);
       })();
     },
