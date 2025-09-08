@@ -10,3 +10,27 @@
 export interface DemoResponse {
   message: string;
 }
+
+export interface AnalyzeResponse {
+  fitScore: number;
+  missingSkills: string[];
+  matchedSkills: string[];
+  candidateSkills: string[];
+  requiredSkills: string[];
+  universe: string[];
+  vectors: { candidate: number[]; required: number[] };
+  recommendations: { title: string; url: string; provider: string; type: "course"|"project"|"certification" }[];
+}
+
+export interface ReportsListResponse {
+  items: Array<{
+    _id?: string;
+    createdAt: string;
+    jobTitle?: string;
+    fitScore: number;
+    missingSkills: string[];
+    matchedSkills: string[];
+    candidateSkills: string[];
+    requiredSkills: string[];
+  }>;
+}
