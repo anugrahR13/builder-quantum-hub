@@ -91,6 +91,7 @@ export const analyzeHandler: RequestHandler = async (req, res) => {
       vectors: { candidate: candVec, required: reqVec },
       recommendations,
       semanticScore,
+      suggestions,
     });
   } catch (err) {
     console.error(err);
