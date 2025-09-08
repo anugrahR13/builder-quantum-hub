@@ -42,7 +42,7 @@ export default function UploadForm() {
 
   return (
     <div className="grid gap-8 lg:grid-cols-2">
-      <div className="rounded-xl p-[1px] bg-gradient-to-r from-[hsl(var(--brand-from))] via-[hsl(var(--brand-via))] to-[hsl(var(--brand-to))]">
+      <div className="rounded-xl p-[1px] bg-gradient-to-r from-[hsl(var(--brand-from))] via-[hsl(var(--brand-via))] to-[hsl(var(--brand-to))] animated-gradient">
         <section className="rounded-xl p-6 bg-card">
           <h3 className="font-semibold mb-1">1. Upload Resume or Paste Text</h3>
           <p className="text-sm text-muted-foreground mb-4">PDF or DOCX supported. Manual entry works too.</p>
@@ -63,7 +63,7 @@ export default function UploadForm() {
         </section>
       </div>
 
-      <div className="rounded-xl p-[1px] bg-gradient-to-r from-[hsl(var(--brand-from))] via-[hsl(var(--brand-via))] to-[hsl(var(--brand-to))]">
+      <div className="rounded-xl p-[1px] bg-gradient-to-r from-[hsl(var(--brand-from))] via-[hsl(var(--brand-via))] to-[hsl(var(--brand-to))] animated-gradient">
         <section className="rounded-xl p-6 bg-card">
           <h3 className="font-semibold mb-1">2. Paste Job Description</h3>
           <p className="text-sm text-muted-foreground mb-4">We'll parse required skills and compute a Job Fit Score.</p>
