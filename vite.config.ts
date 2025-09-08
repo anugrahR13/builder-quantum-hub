@@ -39,7 +39,10 @@ function expressPlugin(): Plugin {
       (async () => {
         const { createServer } = await import("./server");
         const app = createServer();
-        server.middlewares.use(app);
+        const port = 8999;
+        app.listen(port, () => {
+          console.log(`[express] api listening on http://localhost:${port}`);
+        });
       })();
     },
   };
