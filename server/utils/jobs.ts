@@ -17,7 +17,7 @@ export const JOB_ROLES: JobRole[] = [
   { title: "Data Engineer", tags: ["python","sql","airflow","aws","gcp","spark","docker","kubernetes"], description: "Build data pipelines and infrastructure for analytics." },
 ];
 
-export function suggestJobs(candidateSkills: string[], domainHint?: string) {
+export function suggestJobs(candidateSkills: string[], domainHint?: string, count = 6) {
   const universe = buildUniverse(candidateSkills);
   const candVec = vectorize(universe, candidateSkills);
 
@@ -30,14 +30,18 @@ export function suggestJobs(candidateSkills: string[], domainHint?: string) {
   });
 
   // Prefer roles matching the domain hint words if supplied
-  const hint = (domainHint || "").toLowerCase();
-  scored.sort((a, b) => {
-    const ha = hint && a.role.title.toLowerCase().includes(hint) ? 0.05 : 0;
-    const hb = hint && b.role.title.toLowerCase().includes(hint) ? 0.05 : 0;
-    return b.score + hb - (a.score + ha);
-  });
+  const hint = (domainHint || "").toLowerCase().trim();
+  const tokens = hint.split(/[^a-z0-9]+/).filter(Boolean);
+  const boost = (title: string) => {
+    const t = title.toLowerCase();
+    let b = 0;
+    if (hint && t.includes(hint)) b += 0.15; // strong boost for exact hint
+    for (const tok of tokens) if (t.includes(tok)) b += 0.06;
+    return b;
+  };
+  scored.sort((a, b) => (b.score + boost(b.role.title)) - (a.score + boost(a.role.title)));
 
-  return scored.slice(0, 5).map((s) => ({
+  return scored.slice(0, count).map((s) => ({
     title: s.role.title,
     description: s.role.description,
     score: Math.round(s.score * 100),
