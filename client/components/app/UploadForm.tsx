@@ -80,11 +80,33 @@ export default function UploadForm() {
               <Textarea id="jd" rows={10} value={jobDescription} onChange={(e) => setJobDescription(e.target.value)} placeholder="Paste job description here" />
             </div>
             <div className="flex items-center justify-end gap-2">
-              <Button variant="secondary" onClick={() => { setResumeFile(null); setResumeText(""); setSkills([]); setJobDescription(""); setJobTitle(""); setResult(null); }}>Reset</Button>
-              <Button onClick={onSubmit} disabled={loading || (!resumeFile && !resumeText && skills.length === 0) || jobDescription.trim().length < 10}>
-                {loading ? "Analyzing..." : "Analyze"}
-              </Button>
-            </div>
+            <Button variant="ghost" onClick={async () => {
+              // Demo payload
+              const demoResume = `Experienced Data Scientist with 4+ years using Python, Pandas, NumPy, scikit-learn, TensorFlow, SQL, Docker. Built NLP projects with spaCy and Transformers; deployed on AWS with Docker and CI/CD. Collaborated with React/Node teams.`;
+              const demoJD = `We are hiring a Data Scientist proficient in Python, Pandas, scikit-learn, TensorFlow, SQL. Bonus: NLP (spaCy/Transformers), AWS, Docker.`;
+              const fd = new FormData();
+              fd.append("resumeText", demoResume);
+              fd.append("jobDescription", demoJD);
+              fd.append("jobTitle", "Data Scientist");
+              fd.append("manualSkills", JSON.stringify(["python","pandas","numpy","scikit-learn","tensorflow","sql","docker","spacy","transformers"]));
+              setLoading(true);
+              setError(null);
+              try {
+                const res = await fetch("/api/analyze", { method: "POST", body: fd });
+                const data = (await res.json()) as AnalyzeResponse;
+                try { sessionStorage.setItem("lastAnalysis", JSON.stringify({ data, jobTitle: "Data Scientist" })); } catch {}
+                navigate("/results");
+              } catch (e) {
+                setError("Demo failed. Please try again.");
+              } finally {
+                setLoading(false);
+              }
+            }}>Run Demo</Button>
+            <Button variant="secondary" onClick={() => { setResumeFile(null); setResumeText(""); setSkills([]); setJobDescription(""); setJobTitle(""); setResult(null); }}>Reset</Button>
+            <Button onClick={onSubmit} disabled={loading || (!resumeFile && !resumeText && skills.length === 0) || jobDescription.trim().length < 10}>
+              {loading ? "Analyzing..." : "Analyze"}
+            </Button>
+          </div>
             {error && <p className="text-sm text-destructive">{error}</p>}
           </div>
         </section>
