@@ -16,8 +16,8 @@ Tech: React + Tailwind + Recharts (frontend), Express + TypeScript (backend), op
 - Typecheck: `pnpm typecheck`; Build: `pnpm build`; Start prod: `pnpm start`
 
 ### Environment
-- `MONGODB_URI` (optional) – connection string to a MongoDB database.
-- `OPENAI_API_KEY` (optional) – enables semantic score via embeddings API.
+- `MONGODB_URI` (mongodb+srv://anugrahrajput56_db_user:<NBNsLG02cc1RMjaTg>@anugrah13.b6ujpsa.mongodb.net/) – connection string to a MongoDB database.
+- `OPENAI_API_KEY` (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) – enables semantic score via embeddings API.
 
 ## API
 - `POST /api/analyze` (multipart/form-data)
