@@ -1,5 +1,17 @@
 import { SKILL_VOCABULARY } from "./skills";
 
+const SYNONYMS: Record<string, string> = {
+  "reactjs": "react",
+  "nextjs": "next.js",
+  "expressjs": "express",
+  "node": "node.js",
+  "postgres": "postgresql",
+  "tf": "tensorflow",
+  "scikit learn": "scikit-learn",
+  "js": "javascript",
+  "ts": "typescript",
+};
+
 export function normalize(text: string): string {
   return text
     .toLowerCase()
@@ -19,6 +31,11 @@ export function extractSkills(text: string): string[] {
     const t = term.toLowerCase();
     const pat = new RegExp(`(^|[^a-z0-9])${escapeRegExp(t)}([^a-z0-9]|$)`, "i");
     if (pat.test(norm)) found.add(t);
+  }
+  // synonyms to canonical
+  for (const [syn, canonical] of Object.entries(SYNONYMS)) {
+    const pat = new RegExp(`(^|[^a-z0-9])${escapeRegExp(syn)}([^a-z0-9]|$)`, "i");
+    if (pat.test(norm)) found.add(canonical);
   }
   return Array.from(found);
 }
