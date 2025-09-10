@@ -196,7 +196,7 @@ export function ResultsDashboard({ data }: { data: AnalyzeResponse }) {
           </ul>
         )}
         <Button className="mt-4" asChild>
-          <a href="#">View full roadmap</a>
+          <a href="#roadmap">View full roadmap</a>
         </Button>
       </Card>
     </div>
