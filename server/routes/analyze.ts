@@ -27,11 +27,16 @@ export const analyzeHandler: RequestHandler = async (req, res) => {
     }
 
     let resumeText = (req.body.resumeText || "").toString();
+    let parseWarning: string | undefined;
     if (!resumeText && req.file) {
       try {
         resumeText = await extractTextFromUpload(req.file);
+        if (!resumeText || resumeText.trim().length < 20) {
+          parseWarning = "We could not reliably read text from your file. Try pasting resume text or add manual skills.";
+        }
       } catch (e) {
-        resumeText = ""; // ignore extraction errors and continue with manual skills
+        resumeText = "";
+        parseWarning = "Resume parsing failed. Please paste resume text or add manual skills.";
       }
     }
 
@@ -96,6 +101,7 @@ export const analyzeHandler: RequestHandler = async (req, res) => {
       recommendations,
       semanticScore,
       suggestions,
+      parseWarning,
     });
   } catch (err) {
     console.error(err);
