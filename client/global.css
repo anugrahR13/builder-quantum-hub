@@ -1,10 +1,10 @@
 /** @import must precede all other statements */
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap");
 
+@import "./styles/animations.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import "./styles/animations.css";
 
 @layer base {
   /**
