@@ -10,6 +10,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Layout from "./components/Layout";
 import Reports from "./pages/Reports";
+import ResultsPage from "./pages/Results";
 
 const queryClient = new QueryClient();
 
