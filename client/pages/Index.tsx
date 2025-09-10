@@ -19,19 +19,9 @@ export default function Index() {
             </ul>
           </div>
           <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-tr from-[hsl(var(--brand-from))]/25 via-[hsl(var(--brand-via))]/20 to-[hsl(var(--brand-to))]/25 blur-2xl rounded-3xl" />
-            <div className="relative rounded-2xl border bg-card p-6 shadow-lg">
-              <p className="text-sm text-muted-foreground">Example output</p>
-              <div className="mt-2 flex items-end justify-between">
-                <p className="text-5xl font-extrabold">86%</p>
-                <div className="text-right">
-                  <p className="text-xs text-muted-foreground">Missing</p>
-                  <p className="font-medium">Docker, TensorFlow</p>
-                </div>
-              </div>
-              <div className="mt-4 h-2 rounded bg-muted overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-[hsl(var(--brand-from))] via-[hsl(var(--brand-via))] to-[hsl(var(--brand-to))] animated-gradient" style={{ width: "86%" }} />
-              </div>
+            <div className="absolute -inset-8 bg-gradient-to-tr from-[hsl(var(--brand-from))]/20 via-[hsl(var(--brand-via))]/15 to-[hsl(var(--brand-to))]/20 blur-3xl rounded-3xl" />
+            <div className="relative h-56 rounded-2xl border bg-card/60 backdrop-blur-sm flex items-center justify-center glow-card">
+              <p className="text-sm text-muted-foreground">Run an analysis below to see your personalized dashboard.</p>
             </div>
           </div>
         </div>
