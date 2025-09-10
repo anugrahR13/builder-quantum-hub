@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { SkillTagInput } from "./SkillTagInput";
 import type { AnalyzeResponse } from "@shared/api";
 import { ResultsDashboard } from "./ResultsDashboard";
+import { useNavigate } from "react-router-dom";
 
 export default function UploadForm() {
   const [resumeFile, setResumeFile] = useState<File | null>(null);
@@ -16,6 +17,7 @@ export default function UploadForm() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<AnalyzeResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const onSubmit = async () => {
     setError(null);
@@ -32,7 +34,8 @@ export default function UploadForm() {
       if (!res.ok) throw new Error(await res.text());
       const data = (await res.json()) as AnalyzeResponse;
       setResult(data);
-      document.getElementById("results")?.scrollIntoView({ behavior: "smooth" });
+      try { sessionStorage.setItem("lastAnalysis", JSON.stringify({ data, jobTitle })); } catch {}
+      navigate("/results");
     } catch (e: any) {
       setError("Failed to analyze. Please try again.");
     } finally {
@@ -87,11 +90,7 @@ export default function UploadForm() {
         </section>
       </div>
 
-      {result && (
-        <section className="lg:col-span-2">
-          <ResultsDashboard data={result} />
-        </section>
-      )}
+      {/* Results are shown on the /results page after analysis */}
     </div>
   );
 }
