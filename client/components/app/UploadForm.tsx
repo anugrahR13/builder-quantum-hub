@@ -33,6 +33,10 @@ export default function UploadForm() {
       const res = await fetch("/api/analyze", { method: "POST", body: fd });
       if (!res.ok) throw new Error(await res.text());
       const data = (await res.json()) as AnalyzeResponse;
+      if ((!data.candidateSkills || data.candidateSkills.length === 0) && (!skills.length && !resumeText)) {
+        setError(data.parseWarning || "We couldn't read your resume. Please paste resume text or add manual skills, or use Run Demo.");
+        return;
+      }
       setResult(data);
       try { sessionStorage.setItem("lastAnalysis", JSON.stringify({ data, jobTitle })); } catch {}
       navigate("/results");
@@ -108,6 +112,7 @@ export default function UploadForm() {
             </Button>
           </div>
             {error && <p className="text-sm text-destructive">{error}</p>}
+          {result?.parseWarning && <p className="text-xs text-muted-foreground">{result.parseWarning}</p>}
           </div>
         </section>
       </div>
