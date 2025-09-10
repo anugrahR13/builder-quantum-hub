@@ -28,7 +28,11 @@ export const analyzeHandler: RequestHandler = async (req, res) => {
 
     let resumeText = (req.body.resumeText || "").toString();
     if (!resumeText && req.file) {
-      resumeText = await extractTextFromUpload(req.file);
+      try {
+        resumeText = await extractTextFromUpload(req.file);
+      } catch (e) {
+        resumeText = ""; // ignore extraction errors and continue with manual skills
+      }
     }
 
     const candidateSkills = normalizeSkills([
