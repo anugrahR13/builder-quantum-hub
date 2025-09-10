@@ -1,22 +1,24 @@
 export const SKILL_VOCABULARY: string[] = [
   // Programming languages
   "python","javascript","typescript","java","c++","c#","go","rust","ruby","r","sql",
+  // Web / Frontend
+  "html","css","sass","less","tailwind","bootstrap","react","reactjs","next.js","redux","vue","angular","vite","webpack",
+  // Backend / Web
+  "node.js","node","express","expressjs","fastapi","flask","graphql","rest api","nestjs","django","spring boot",
   // Data science / ML core
   "machine learning","deep learning","nlp","computer vision","data analysis","statistics",
   // Python DS stack
-  "numpy","pandas","scikit-learn","matplotlib","seaborn","tensorflow","pytorch","keras","xgboost",
+  "numpy","pandas","scikit-learn","matplotlib","seaborn","tensorflow","tf","pytorch","keras","xgboost",
   // NLP stack
   "spacy","nltk","transformers","hugging face","gensim","sentence transformers",
-  // MLOps / tooling
-  "mlops","mlflow","dvc","airflow","kubeflow",
   // Databases
-  "mongodb","postgresql","mysql","sqlite","firebase","dynamodb","redis",
+  "mongodb","postgresql","postgres","mysql","sqlite","firebase","dynamodb","redis","elasticsearch",
   // Cloud
   "aws","gcp","azure","sagemaker","bigquery","databricks",
   // DevOps / tools
-  "git","docker","kubernetes","linux","bash","jira","github","gitlab","bitbucket",
-  // Web
-  "react","node.js","express","flask","fastapi","graphql","rest api",
+  "git","docker","kubernetes","linux","bash","jira","github","gitlab","bitbucket","jenkins","github actions","ci/cd",
+  // Testing / tooling
+  "jest","vitest","cypress","playwright","storybook",
 ];
 
 export type Resource = { title: string; url: string; provider: string; type: "course"|"project"|"certification" };
