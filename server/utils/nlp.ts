@@ -1,15 +1,15 @@
 import { SKILL_VOCABULARY } from "./skills";
 
 const SYNONYMS: Record<string, string> = {
-  "reactjs": "react",
-  "nextjs": "next.js",
-  "expressjs": "express",
-  "node": "node.js",
-  "postgres": "postgresql",
-  "tf": "tensorflow",
+  reactjs: "react",
+  nextjs: "next.js",
+  expressjs: "express",
+  node: "node.js",
+  postgres: "postgresql",
+  tf: "tensorflow",
   "scikit learn": "scikit-learn",
-  "js": "javascript",
-  "ts": "typescript",
+  js: "javascript",
+  ts: "typescript",
 };
 
 export function normalize(text: string): string {
@@ -34,13 +34,19 @@ export function extractSkills(text: string): string[] {
   }
   // synonyms to canonical
   for (const [syn, canonical] of Object.entries(SYNONYMS)) {
-    const pat = new RegExp(`(^|[^a-z0-9])${escapeRegExp(syn)}([^a-z0-9]|$)`, "i");
+    const pat = new RegExp(
+      `(^|[^a-z0-9])${escapeRegExp(syn)}([^a-z0-9]|$)`,
+      "i",
+    );
     if (pat.test(norm)) found.add(canonical);
   }
   return Array.from(found);
 }
 
-export function vectorize(skillsUniverse: string[], present: string[]): number[] {
+export function vectorize(
+  skillsUniverse: string[],
+  present: string[],
+): number[] {
   const set = new Set(present.map((s) => s.toLowerCase()));
   return skillsUniverse.map((s) => (set.has(s.toLowerCase()) ? 1 : 0));
 }

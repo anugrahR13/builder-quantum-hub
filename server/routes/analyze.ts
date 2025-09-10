@@ -7,7 +7,10 @@ import { SKILL_VOCABULARY, recommendResources } from "../utils/skills";
 import { saveAnalysis } from "../db";
 import { suggestJobs } from "../utils/jobs";
 
-export const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 10 * 1024 * 1024 } });
+export const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 10 * 1024 * 1024 },
+});
 
 const analyzeSchema = z.object({
   jobDescription: z.string().min(10),
@@ -32,11 +35,13 @@ export const analyzeHandler: RequestHandler = async (req, res) => {
       try {
         resumeText = await extractTextFromUpload(req.file);
         if (!resumeText || resumeText.trim().length < 20) {
-          parseWarning = "We could not reliably read text from your file. Try pasting resume text or add manual skills.";
+          parseWarning =
+            "We could not reliably read text from your file. Try pasting resume text or add manual skills.";
         }
       } catch (e) {
         resumeText = "";
-        parseWarning = "Resume parsing failed. Please paste resume text or add manual skills.";
+        parseWarning =
+          "Resume parsing failed. Please paste resume text or add manual skills.";
       }
     }
 
@@ -45,7 +50,9 @@ export const analyzeHandler: RequestHandler = async (req, res) => {
       ...parsed.data.manualSkills,
     ]);
 
-    const requiredSkills = normalizeSkills(extractSkills(parsed.data.jobDescription));
+    const requiredSkills = normalizeSkills(
+      extractSkills(parsed.data.jobDescription),
+    );
 
     const universe = buildUniverse(candidateSkills, requiredSkills);
     const candVec = vectorize(universe, candidateSkills);
@@ -54,17 +61,28 @@ export const analyzeHandler: RequestHandler = async (req, res) => {
     const sim = cosine(candVec, reqVec);
     const fitScore = Math.round(sim * 100);
 
-    const missingSkills = requiredSkills.filter((s) => !candidateSkills.includes(s));
-    const matchedSkills = requiredSkills.filter((s) => candidateSkills.includes(s));
+    const missingSkills = requiredSkills.filter(
+      (s) => !candidateSkills.includes(s),
+    );
+    const matchedSkills = requiredSkills.filter((s) =>
+      candidateSkills.includes(s),
+    );
 
     const recommendations = recommendResources(missingSkills);
 
-    const suggestions = suggestJobs(candidateSkills, parsed.data.jobTitle || inferJobTitle(parsed.data.jobDescription));
+    const suggestions = suggestJobs(
+      candidateSkills,
+      parsed.data.jobTitle || inferJobTitle(parsed.data.jobDescription),
+    );
 
     // Optional: semantic similarity using OpenAI embeddings if key exists
     let semanticScore: number | undefined = undefined;
     try {
-      if (process.env.OPENAI_API_KEY && resumeText && parsed.data.jobDescription) {
+      if (
+        process.env.OPENAI_API_KEY &&
+        resumeText &&
+        parsed.data.jobDescription
+      ) {
         const [ea, eb] = await Promise.all([
           embedText(resumeText, process.env.OPENAI_API_KEY),
           embedText(parsed.data.jobDescription, process.env.OPENAI_API_KEY),
@@ -79,7 +97,8 @@ export const analyzeHandler: RequestHandler = async (req, res) => {
     try {
       await saveAnalysis({
         createdAt: new Date(),
-        jobTitle: parsed.data.jobTitle || inferJobTitle(parsed.data.jobDescription),
+        jobTitle:
+          parsed.data.jobTitle || inferJobTitle(parsed.data.jobDescription),
         fitScore,
         missingSkills,
         matchedSkills,
