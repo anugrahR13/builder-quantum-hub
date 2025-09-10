@@ -22,6 +22,7 @@ export interface AnalyzeResponse {
   recommendations: { title: string; url: string; provider: string; type: "course"|"project"|"certification" }[];
   semanticScore?: number; // Optional cosine similarity using embeddings when OPENAI_API_KEY is set
   suggestions?: { title: string; description: string; score: number; matched: string[]; missing: string[] }[];
+  parseWarning?: string;
 }
 
 export interface ReportsListResponse {
