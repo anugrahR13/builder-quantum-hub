@@ -115,6 +115,16 @@ export default function ResultsPage() {
           </div>
         </div>
       </section>
+
+      <section className="container py-10">
+        <Card className="p-6 glow-card">
+          <h2 className="text-2xl font-semibold">Courses by price</h2>
+          <p className="text-sm text-muted-foreground mt-1">Split into free and paid from reputed providers.</p>
+          <div className="mt-4">
+            <CoursesSection items={data.recommendations} />
+          </div>
+        </Card>
+      </section>
     </div>
   );
 }
