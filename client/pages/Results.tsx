@@ -13,8 +13,8 @@ import MentorPanel from "@/components/app/MentorPanel";
 export default function ResultsPage() {
   const [data, setData] = useState<AnalyzeResponse | null>(null);
   const [jobTitle, setJobTitle] = useState<string>("");
-  const [resumeText] = useState<string>("");
-  const [jobDescription] = useState<string>("");
+  const [resumeText, setResumeText] = useState<string>("");
+  const [jobDescription, setJobDescription] = useState<string>("");
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -25,6 +25,8 @@ export default function ResultsPage() {
         const parsed = JSON.parse(raw);
         setData(parsed.data as AnalyzeResponse);
         setJobTitle(parsed.jobTitle || "");
+        if (parsed.resumeText) setResumeText(parsed.resumeText);
+        if (parsed.jobDescription) setJobDescription(parsed.jobDescription);
       } catch {
         // ignore
       }
@@ -81,7 +83,7 @@ export default function ResultsPage() {
           <div className="lg:col-span-2">
             <ResultsDashboard data={data} />
           </div>
-          <ResumeTools resumeText={""} jobDescription={""} />
+          <ResumeTools resumeText={resumeText} jobDescription={jobDescription} />
         </div>
       </section>
 
