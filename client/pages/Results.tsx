@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import RoadmapTimeline from "@/components/app/RoadmapTimeline";
 import SkillTreeGraph from "@/components/app/SkillTreeGraph";
 import BenchmarkPanel from "@/components/app/BenchmarkPanel";
+import MentorPanel from "@/components/app/MentorPanel";
 
 export default function ResultsPage() {
   const [data, setData] = useState<AnalyzeResponse | null>(null);
@@ -101,6 +102,7 @@ export default function ResultsPage() {
               <SkillTreeGraph matched={data.matchedSkills} missing={data.missingSkills} />
             </Card>
             <BenchmarkPanel />
+            <MentorPanel missing={data.missingSkills} matched={data.matchedSkills} />
           </div>
         </div>
       </section>
