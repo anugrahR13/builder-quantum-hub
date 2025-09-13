@@ -4,6 +4,7 @@ import cors from "cors";
 import { handleDemo } from "./routes/demo";
 import { analyzeHandler, upload } from "./routes/analyze";
 import { listReports } from "./routes/reports";
+import { signup, login, me, logout } from "./routes/auth";
 
 export function createServer() {
   const app = express();
@@ -27,6 +28,12 @@ export function createServer() {
 
   // Reports
   app.get("/api/reports", listReports);
+
+  // Auth
+  app.post("/api/auth/signup", signup);
+  app.post("/api/auth/login", login);
+  app.get("/api/auth/me", me);
+  app.post("/api/auth/logout", logout);
 
   return app;
 }

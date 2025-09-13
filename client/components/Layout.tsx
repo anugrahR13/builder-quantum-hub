@@ -1,6 +1,7 @@
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { Link, Outlet, useLocation } from "react-router-dom";
 
 export default function Layout() {
   const { pathname } = useLocation();
@@ -15,6 +16,8 @@ export default function Layout() {
           <nav className="flex items-center gap-2">
             <NavLink to="/" active={pathname === "/"}>Home</NavLink>
             <NavLink to="/reports" active={pathname.startsWith("/reports")}>Reports</NavLink>
+            <NavLink to="/login" active={pathname.startsWith("/login")}>Login</NavLink>
+            <NavLink to="/signup" active={pathname.startsWith("/signup")}>Sign up</NavLink>
             <Button asChild size="sm" className="ml-2 bg-gradient-to-r from-[hsl(var(--brand-from))] via-[hsl(var(--brand-via))] to-[hsl(var(--brand-to))] text-primary-foreground animated-gradient">
               <a href="#get-started">Get Started</a>
             </Button>

@@ -3,7 +3,7 @@ import { MongoClient, ServerApiVersion } from "mongodb";
 const uri = process.env.MONGODB_URI;
 let client: MongoClient | null = null;
 
-async function getClient(): Promise<MongoClient | null> {
+export async function getClient(): Promise<MongoClient | null> {
   if (!uri) return null;
   if (client) return client;
   client = new MongoClient(uri, {
@@ -13,7 +13,7 @@ async function getClient(): Promise<MongoClient | null> {
   return client;
 }
 
-type AnalysisDoc = {
+export type AnalysisDoc = {
   _id?: string;
   createdAt: Date;
   jobTitle?: string;
