@@ -59,5 +59,9 @@ export function createServer() {
   app.get("/api/progress", getProgress);
   app.post("/api/progress/award", awardXP);
 
+  // Mentors & translation
+  app.post("/api/mentors/suggest", suggestMentors);
+  app.post("/api/translate", translate);
+
   return app;
 }
