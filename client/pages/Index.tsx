@@ -1,4 +1,6 @@
 import UploadForm from "@/components/app/UploadForm";
+import JobTicker from "@/components/app/JobTicker";
+import ChatWidget from "@/components/app/ChatWidget";
 
 export default function Index() {
   return (
@@ -48,7 +50,16 @@ export default function Index() {
       </section>
 
       <section className="container py-12">
-        <UploadForm />
+        <div className="grid gap-6 lg:grid-cols-3">
+          <div className="lg:col-span-2">
+            <UploadForm />
+          </div>
+          <div>
+            <h3 className="font-semibold mb-2">Job market trends</h3>
+            <JobTicker />
+          </div>
+        </div>
+        <ChatWidget />
       </section>
     </div>
   );
