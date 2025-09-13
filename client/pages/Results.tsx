@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import RoadmapTimeline from "@/components/app/RoadmapTimeline";
 import SkillTreeGraph from "@/components/app/SkillTreeGraph";
+import BenchmarkPanel from "@/components/app/BenchmarkPanel";
 
 export default function ResultsPage() {
   const [data, setData] = useState<AnalyzeResponse | null>(null);
@@ -94,10 +95,13 @@ export default function ResultsPage() {
               <Button onClick={async () => { await fetch('/api/progress/award', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ points: 25 }) }); }}>Mark as Started (+25 XP)</Button>
             </div>
           </Card>
-          <Card className="p-6">
-            <h3 className="font-semibold mb-2">Skill Tree</h3>
-            <SkillTreeGraph matched={data.matchedSkills} missing={data.missingSkills} />
-          </Card>
+          <div className="grid gap-6">
+            <Card className="p-6">
+              <h3 className="font-semibold mb-2">Skill Tree</h3>
+              <SkillTreeGraph matched={data.matchedSkills} missing={data.missingSkills} />
+            </Card>
+            <BenchmarkPanel />
+          </div>
         </div>
       </section>
     </div>
