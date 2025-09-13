@@ -5,6 +5,12 @@ import { handleDemo } from "./routes/demo";
 import { analyzeHandler, upload } from "./routes/analyze";
 import { listReports } from "./routes/reports";
 import { signup, login, me, logout } from "./routes/auth";
+import { jobFeed } from "./routes/jobfeed";
+import { benchmark } from "./routes/benchmark";
+import { skillsList } from "./routes/skills";
+import { atsCheck, enhance } from "./routes/resume";
+import { agentChat } from "./routes/agent";
+import { getProgress, awardXP } from "./routes/progress";
 
 export function createServer() {
   const app = express();
@@ -34,6 +40,22 @@ export function createServer() {
   app.post("/api/auth/login", login);
   app.get("/api/auth/me", me);
   app.post("/api/auth/logout", logout);
+
+  // Skills & feed
+  app.get("/api/skills", skillsList);
+  app.get("/api/job-feed", jobFeed);
+  app.get("/api/benchmark", benchmark);
+
+  // Resume enhancement
+  app.post("/api/resume/ats", atsCheck);
+  app.post("/api/resume/enhance", enhance);
+
+  // AI agent
+  app.post("/api/agent/chat", agentChat);
+
+  // Gamification
+  app.get("/api/progress", getProgress);
+  app.post("/api/progress/award", awardXP);
 
   return app;
 }
