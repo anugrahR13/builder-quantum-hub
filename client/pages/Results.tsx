@@ -9,6 +9,7 @@ import SkillTreeGraph from "@/components/app/SkillTreeGraph";
 import ResumeTools from "@/components/app/ResumeTools";
 import BenchmarkPanel from "@/components/app/BenchmarkPanel";
 import MentorPanel from "@/components/app/MentorPanel";
+import CoursesSection from "@/components/app/CoursesSection";
 
 export default function ResultsPage() {
   const [data, setData] = useState<AnalyzeResponse | null>(null);
