@@ -11,6 +11,8 @@ import { skillsList } from "./routes/skills";
 import { atsCheck, enhance } from "./routes/resume";
 import { agentChat } from "./routes/agent";
 import { getProgress, awardXP } from "./routes/progress";
+import { suggestMentors } from "./routes/mentors";
+import { translate } from "./routes/translate";
 
 export function createServer() {
   const app = express();
