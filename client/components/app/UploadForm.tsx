@@ -48,7 +48,7 @@ export default function UploadForm() {
       try {
         sessionStorage.setItem(
           "lastAnalysis",
-          JSON.stringify({ data, jobTitle }),
+          JSON.stringify({ data, jobTitle, resumeText, jobDescription }),
         );
       } catch {}
       navigate("/results");
@@ -161,7 +161,7 @@ export default function UploadForm() {
                     try {
                       sessionStorage.setItem(
                         "lastAnalysis",
-                        JSON.stringify({ data, jobTitle: "Data Scientist" }),
+                        JSON.stringify({ data, jobTitle: "Data Scientist", resumeText: demoResume, jobDescription: demoJD }),
                       );
                     } catch {}
                     navigate("/results");
