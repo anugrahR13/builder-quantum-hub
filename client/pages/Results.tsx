@@ -6,12 +6,15 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import RoadmapTimeline from "@/components/app/RoadmapTimeline";
 import SkillTreeGraph from "@/components/app/SkillTreeGraph";
+import ResumeTools from "@/components/app/ResumeTools";
 import BenchmarkPanel from "@/components/app/BenchmarkPanel";
 import MentorPanel from "@/components/app/MentorPanel";
 
 export default function ResultsPage() {
   const [data, setData] = useState<AnalyzeResponse | null>(null);
   const [jobTitle, setJobTitle] = useState<string>("");
+  const [resumeText] = useState<string>("");
+  const [jobDescription] = useState<string>("");
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -74,8 +77,11 @@ export default function ResultsPage() {
             </Button>
           </div>
         </div>
-        <div className="mt-8">
-          <ResultsDashboard data={data} />
+        <div className="mt-8 grid gap-6 lg:grid-cols-3">
+          <div className="lg:col-span-2">
+            <ResultsDashboard data={data} />
+          </div>
+          <ResumeTools resumeText={""} jobDescription={""} />
         </div>
       </section>
 
